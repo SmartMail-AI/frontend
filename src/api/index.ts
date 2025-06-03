@@ -19,9 +19,7 @@ export async function fetchEmails({ pageParam: pageToken }: { pageParam?: string
   return response.data;
 }
 
-export async function fetchEmail(id?: string) {
-  if(! id)
-    return;
+export async function fetchEmail(id: string) {
   const response = await axiosInstance.get<DetailedEmail>(`/emails/${id}`);
   return response.data;
 }
