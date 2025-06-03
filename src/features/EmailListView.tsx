@@ -31,7 +31,7 @@ export default function EmailListView({
             <div className="flex items-start gap-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={`/placeholder.svg?height=32&width=32`}/>
-                <AvatarFallback>{email.from_}</AvatarFallback>
+                <AvatarFallback>{email.from_[0]}</AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
