@@ -1,8 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import { LoginContextProvider } from './contexts/LoginContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from 'react-router';
+import router from './lib/routes';
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,7 @@ enableMocking().then(() => {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <LoginContextProvider>
-          <App />
+          <RouterProvider router={router} />
         </LoginContextProvider>
       </QueryClientProvider>
     </StrictMode>,
