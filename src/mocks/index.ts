@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { mockEmails } from './mock';
+import { mockCategories, mockEmails } from './mock';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL! + '/api';
 const PAGE_SIZE = 10;
@@ -7,7 +7,7 @@ const PAGE_SIZE = 10;
 export const handlers = [
 // GET /api/emails?page=1
   http.get(`${SERVER_URL}/emails`, ({ request: req }) => {
-    const pageParam = new URLSearchParams(req.url).get('page');
+    const pageParam = new URL(req.url).searchParams.get('page_token');
     const page = pageParam ? parseInt(pageParam, 10) : 1;
 
     const start = (page - 1) * PAGE_SIZE;
@@ -39,7 +39,11 @@ export const handlers = [
     }
 
     return HttpResponse.json(email)
-  })
+  }),
+
+  http.get(`${SERVER_URL}/categories`, () => {
+    return HttpResponse.json(mockCategories);
+  }),
 ];
 
 import { setupWorker } from 'msw/browser'

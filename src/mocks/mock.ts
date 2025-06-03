@@ -1,6 +1,6 @@
 import type { DetailedEmail } from '../types';
 
-const categories = [
+const mockCategories = [
   '중요', '프로모션', '쇼핑', '스팸'
 ]
 
@@ -428,4 +428,4 @@ const mockEmails: DetailedEmail[] = [
 ];
 
 
-export { categories, mockEmails };
+export { mockCategories, mockEmails };
