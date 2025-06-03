@@ -10,28 +10,20 @@ import { ScrollArea } from '../components/ui/scroll-area';
 import { getPriorityColor } from '../utils/theme';
 
 import { getEmailPriority } from '../utils/email';
-import { useQuery } from '@tanstack/react-query';
 import { fetchEmail } from '../api';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 interface SelectedEmailViewProps {
-  selectedEmailId?: string;
-  setSelectedEmailId: (emailId?: number) => void;
+  selectedEmailId: string;
+  setSelectedEmailId: (emailId?: string) => void;
 }
 
 export default function SelectedEmailView({ selectedEmailId, setSelectedEmailId }: SelectedEmailViewProps) {
-  const { data: selectedEmail, isFetching } = useQuery({
+  const { data: selectedEmail } = useSuspenseQuery({
     queryKey: ['email', selectedEmailId],
     queryFn: () => fetchEmail(selectedEmailId),
   });
-  if(! selectedEmailId) {
-    return null;
-  }
-  if(! isFetching) {
-    return null; // TODO: skeleton UI
-  }
-  //TODO: 에러처리
-  const email = selectedEmail!;
-  const priority = getEmailPriority(email);
+  const priority = getEmailPriority(selectedEmail);
 
   return (
     <div className="flex-1 flex flex-col">
@@ -39,7 +31,7 @@ export default function SelectedEmailView({ selectedEmailId, setSelectedEmailId 
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Badge variant="outline" className={`text-indigo-400`}>
-              {email!.category}
+              {selectedEmail!.category}
             </Badge>
             <Badge variant="outline" className={getPriorityColor(priority)}>
               {priority === "high"
@@ -78,24 +70,24 @@ export default function SelectedEmailView({ selectedEmailId, setSelectedEmailId 
           </div>
         </div>
 
-        <h1 className="text-xl font-semibold mb-3">{email.subject}</h1>
+        <h1 className="text-xl font-semibold mb-3">{selectedEmail.subject}</h1>
 
         <div className="flex items-center gap-3">
           <Avatar className="h-10 w-10">
             <AvatarImage src={`/placeholder.svg?height=40&width=40`} />
-            <AvatarFallback>{email.from_}</AvatarFallback>
+            <AvatarFallback>{selectedEmail.from_[0]}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <div className="font-medium">{email.from_}</div>
-            <div className="text-sm text-muted-foreground">{email.content}</div>
+            <div className="font-medium">{selectedEmail.from_}</div>
+            <div className="text-sm text-muted-foreground">{selectedEmail.summary}</div>
           </div>
-          <div className="text-sm text-muted-foreground">{email.date.toLocaleString()}</div>
+          <div className="text-sm text-muted-foreground">{selectedEmail.date.toLocaleString()}</div>
         </div>
       </div>
 
       <ScrollArea className="flex-1 p-6">
         <div className="prose prose-sm max-w-none">
-          <div className="whitespace-pre-wrap text-sm leading-relaxed">{email.content}</div>
+          <div className="whitespace-pre-wrap text-sm leading-relaxed">{selectedEmail.content}</div>
         </div>
       </ScrollArea>
     </div>
