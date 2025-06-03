@@ -31,15 +31,22 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.9.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "msw": "^2.8.7",
     "tw-animate-css": "^1.3.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
-  "packageManager": "pnpm@9.4.0+sha1.9217c800d4ab947a7aee520242a7b70d64fc7638"
+  "packageManager": "pnpm@9.4.0+sha1.9217c800d4ab947a7aee520242a7b70d64fc7638",
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
 }
