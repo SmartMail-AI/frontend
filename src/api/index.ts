@@ -23,3 +23,8 @@ export async function fetchEmail(id: string) {
   const response = await axiosInstance.get<DetailedEmail>(`/emails/${id}`);
   return response.data;
 }
+
+export async function fetchCategories() {
+  const response = await axiosInstance.get<string[]>('/categories');
+  return response.data;
+}
