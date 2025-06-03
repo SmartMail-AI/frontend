@@ -2,8 +2,8 @@ import { Button } from '../components/ui/button';
 
 interface CategoryListViewProps {
   categories: string[];
-  setSelectedCategory: (category: string) => void;
-  selectedCategory: string;
+  setSelectedCategory: (category?: string) => void;
+  selectedCategory?: string;
 }
 
 export default function CategoryListView({ categories, selectedCategory, setSelectedCategory }: CategoryListViewProps) {
