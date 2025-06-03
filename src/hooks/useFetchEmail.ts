@@ -1,4 +1,6 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import {
+  useSuspenseInfiniteQuery,
+} from '@tanstack/react-query';
 import { fetchEmails } from '../api';
 
 export default function useFetchEmails() { // 추후 category 추가
@@ -10,7 +12,7 @@ export default function useFetchEmails() { // 추후 category 추가
     data: emailPageData,
     hasNextPage: hasNextEmailPage,
     hasPreviousPage: hasPreviousEmailPage,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     queryKey: ['emails'],
     queryFn: fetchEmails,
     initialPageParam: undefined,
