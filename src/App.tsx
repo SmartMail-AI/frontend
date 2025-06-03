@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { ScrollArea } from './components/ui/scroll-area';
-import { categories as mockCategories, mockEmails } from './mock';
+import { categories as mockCategories, mockEmails } from './mocks/mock';
 import EmailListView from './features/EmailListView';
 import CategoryListView from './features/CategoryListView';
+import SelectedEmailView from './features/SelectedEmailView';
+import useFetchEmails from './hooks/useFetchEmail';
 
 export default function App() {
-  const [selectedCategory, setSelectedCategory] = useState("AI분류");
+  const [selectedCategory, setSelectedCategory] = useState<string>();
   const [selectedEmailId, setSelectedEmailId] = useState<string>();
   const [categories,] = useState<string[]>(mockCategories);
+  const {
+    emailPageData,
+    isFetchingNextEmailPage,
+    isFetchingPreviousEmailPage,
+    hasNextEmailPage,
+    hasPreviousEmailPage,
+    fetchPreviousEmailPage,
+    fetchNextEmailPage,
+  } = useFetchEmails();
   return (
     <div className="flex h-screen bg-background">
       {/* 사이드바 - 카테고리 */}
@@ -47,7 +58,16 @@ export default function App() {
         />
       </div>
 
-      {/*Selected Email View*/}
+      {
+        selectedEmailId && (
+          <Suspense fallback={<p>Loading..</p>}>
+            <SelectedEmailView
+              setSelectedEmailId={setSelectedEmailId}
+              selectedEmailId={selectedEmailId}
+            />
+          </Suspense>
+        )
+      }
 
     </div>
   )
