@@ -1,24 +1,29 @@
-import { Suspense, useState } from 'react';
+import { Suspense, use, useEffect, useState } from 'react';
 import { ScrollArea } from './components/ui/scroll-area';
-import { categories as mockCategories, mockEmails } from './mocks/mock';
-import EmailListView from './features/EmailListView';
 import CategoryListView from './features/CategoryListView';
 import SelectedEmailView from './features/SelectedEmailView';
-import useFetchEmails from './hooks/useFetchEmail';
+import PaginatedEmailView from './features/PaginatedEmailView';
+import { useQuery } from '@tanstack/react-query';
+import { fetchCategories } from './api';
+import LoginContext from './contexts/LoginContext';
+import { useNavigate } from 'react-router';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [selectedEmailId, setSelectedEmailId] = useState<string>();
-  const [categories,] = useState<string[]>(mockCategories);
-  const {
-    emailPageData,
-    isFetchingNextEmailPage,
-    isFetchingPreviousEmailPage,
-    hasNextEmailPage,
-    hasPreviousEmailPage,
-    fetchPreviousEmailPage,
-    fetchNextEmailPage,
-  } = useFetchEmails();
+  const { isLoggedIn } = use(LoginContext);
+  const { data: categoryData, isFetching: isCategoryFetching } = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
+  });
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if(! isLoggedIn) {
+      navigate('/login');
+    }
+  }, [navigate, isLoggedIn]);
+
   return (
     <div className="flex h-screen bg-background">
       {/* 사이드바 - 카테고리 */}
@@ -27,11 +32,15 @@ export default function App() {
           <h2 className="text-lg font-semibold mb-4">이메일 분류</h2>
           <ScrollArea className="h-[calc(100vh-120px)]">
             <div className="space-y-1">
-              <CategoryListView
-                categories={categories}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-              />
+              {
+                isCategoryFetching ? null : (
+                  <CategoryListView
+                    categories={categoryData!}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                )
+              }
             </div>
           </ScrollArea>
         </div>
@@ -47,17 +56,14 @@ export default function App() {
             <span className="text-sm text-muted-foreground">10개의 이메일</span>
           </div>
         </div>
-
-        <EmailListView
-          emails={mockEmails}
-          onEmailSelect={(email) => {
-            setSelectedEmailId(email.id)
-          }}
-          selectedCategory={selectedCategory}
-          selectedEmailId={selectedEmailId}
-        />
+        <Suspense>
+          <PaginatedEmailView
+            setSelectedEmailId={setSelectedEmailId}
+            selectedEmailId={selectedEmailId}
+            selectedCategory={selectedCategory}
+          />
+        </Suspense>
       </div>
-
       {
         selectedEmailId && (
           <Suspense fallback={<p>Loading..</p>}>
@@ -68,7 +74,6 @@ export default function App() {
           </Suspense>
         )
       }
-
     </div>
   )
 }
