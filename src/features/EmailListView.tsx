@@ -55,11 +55,11 @@ export default function EmailListView({
                     {getEmailPriority(email) === 'high' ?
                       '높음' :
                       getEmailPriority(email) === 'low' ? '낮음' : '보통'}
-                  </Badge> {selectedCategory && email.category && (
-                  <Badge variant="secondary"
-                    className="text-xs bg-purple-100 text-purple-700"> AI: {email.category}
                   </Badge>
-                )} <Clock
+                  <Badge variant="secondary"
+                    className={`text-xs bg-purple-100 ${email.category === selectedCategory ? 'text-purple-700' : 'text-purple-400'}`}> AI: {email.category}
+                  </Badge>
+                  <Clock
                   className={`h-3 w-3 ${getPriorityColor(email.category)}`}/>
                 </div>
               </div>
