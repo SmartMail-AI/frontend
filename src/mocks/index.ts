@@ -7,23 +7,35 @@ const PAGE_SIZE = 10;
 export const handlers = [
 // GET /api/emails?page=1
   http.get(`${SERVER_URL}/emails`, ({ request: req }) => {
-    const pageParam = new URL(req.url).searchParams.get('page_token');
+    const url = new URL(req.url);
+
+    const pageParam = url.searchParams.get('page_token');
+    const categoryParam = url.searchParams.get('category');
+
     const page = pageParam ? parseInt(pageParam, 10) : 1;
+
+    // 카테고리 필터링
+    const filteredEmails = categoryParam
+      ? mockEmails.filter((email) => email.category === categoryParam)
+      : mockEmails;
 
     const start = (page - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
-    const pageEmails = mockEmails.slice(start, end);
+    const pageEmails = filteredEmails.slice(start, end);
 
     // `content` 필드 제거해서 Email[] 반환
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const messages = pageEmails.map(({ content, ...email }) => email);
 
-    const hasNextPage = end < mockEmails.length;
-    const nextPageToken = hasNextPage ? String(page + 1) : '';
+    const hasPrevPage = start > 0;
+    const hasNextPage = end < filteredEmails.length;
+    const nextPageToken = hasNextPage ? String(page + 1) : undefined;
+    const prevPageToken = hasPrevPage ? String(page - 1) : undefined;
 
     return HttpResponse.json({
       messages,
-      next_page_token: nextPageToken
+      next_page_token: nextPageToken,
+      previous_page_token: prevPageToken,
     });
   }),
 
@@ -41,7 +53,7 @@ export const handlers = [
     return HttpResponse.json(email)
   }),
 
-  http.get(`${SERVER_URL}/categories`, () => {
+  http.get(`${SERVER_URL}/emails/categories`, () => {
     return HttpResponse.json(mockCategories);
   }),
 ];
