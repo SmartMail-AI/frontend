@@ -18,5 +18,10 @@ export interface DetailedEmail extends Email {
 
 export interface GetEmailsResponse {
   messages: Email[];
-  next_page_token: string;
+  next_page_token: string | null;
+  previous_page_token: string | null;
+}
+
+export interface GetAuthUrlResponse {
+  authorization_url: string;
 }
