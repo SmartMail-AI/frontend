@@ -12,9 +12,9 @@ async function enableMocking() {
     return;
   }
 
-  const { worker } = await import('./mocks');
-
-  return worker.start();
+  // const { worker } = await import('./mocks');
+  //
+  // return worker.start();
 }
 
 enableMocking().then(() => {
