@@ -7,6 +7,7 @@ interface CategoryListViewProps {
 }
 
 export default function CategoryListView({ categories, selectedCategory, setSelectedCategory }: CategoryListViewProps) {
+  categories = ['전체', ...categories];
   return categories.map((category) => {
     return (
       <div key={category}>
@@ -14,6 +15,10 @@ export default function CategoryListView({ categories, selectedCategory, setSele
           variant={selectedCategory === category ? "secondary" : "ghost"}
           className="w-full justify-start gap-3 h-10"
           onClick={() => {
+            if(category === '전체') {
+              setSelectedCategory(undefined);
+              return;
+            }
             setSelectedCategory(category)
           }}
         >
