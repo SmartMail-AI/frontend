@@ -8,7 +8,7 @@ import { fetchAuthUrl, fetchCategories } from './api';
 import LoginContext from './contexts/LoginContext';
 import CenteredSpinner from './components/centered-spinner';
 import { Button } from './components/ui/button';
-import { invalidateToken } from './utils/storage';
+import { invalidateToken, isTokenStored } from './utils/storage';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>();
@@ -19,6 +19,7 @@ export default function App() {
     queryKey: ['categories'],
     queryFn: fetchCategories,
     initialData: [],
+    enabled: isTokenStored,
   });
 
   const handleLoginClick = useCallback(async() => {

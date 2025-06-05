@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getStoredValue } from '../utils/storage';
+import { getStoredValue, invalidateToken } from '../utils/storage';
 import type {
   DetailedEmail,
   GetAuthUrlResponse,
@@ -12,6 +12,20 @@ export const axiosInstance = axios.create({
     authorization: `Bearer ${getStoredValue('token') || ''}`,
   }
 });
+
+axiosInstance.interceptors.response.use(
+  response => response,
+  error => {
+    if (error.response?.status === 401) {
+      invalidateToken()
+      window.location.reload();
+    }
+
+    return Promise.reject(error)
+  }
+)
+
+
 
 export async function fetchAuthUrl() {
   const response = await axiosInstance.get<GetAuthUrlResponse>('/auth/google');
