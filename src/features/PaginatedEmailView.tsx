@@ -4,17 +4,18 @@ import {
   PaginationContent,
   PaginationItem, PaginationNext, PaginationPrevious,
 } from '../components/ui/pagination';
-import { useState } from 'react';
-import useFetchEmails from '../hooks/useFetchEmail';
+import useFetchEmails from '../hooks/useFetchEmails';
 
 interface PaginatedEmailViewProps {
   selectedEmailId?: string;
   setSelectedEmailId: (selectedEmailId?: string) => void;
   selectedCategory?: string;
+  currentPage: number;
+  setCurrentPage: (currentPage: number) => void;
 }
 
-export default function PaginatedEmailView({ selectedEmailId, setSelectedEmailId, selectedCategory }: PaginatedEmailViewProps) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function PaginatedEmailView({ selectedEmailId, setSelectedEmailId, selectedCategory, currentPage, setCurrentPage}
+                                             : PaginatedEmailViewProps) {
   const {
     emailPageData,
     isFetchingNextEmailPage,
@@ -23,7 +24,7 @@ export default function PaginatedEmailView({ selectedEmailId, setSelectedEmailId
     hasPreviousEmailPage,
     fetchPreviousEmailPage,
     fetchNextEmailPage,
-  } = useFetchEmails();
+  } = useFetchEmails({ selectedCategory });
   return (
     <>
     <EmailListView
@@ -42,7 +43,7 @@ export default function PaginatedEmailView({ selectedEmailId, setSelectedEmailId
               onClick={async() => {
                 if (hasPreviousEmailPage && !isFetchingPreviousEmailPage) {
                   await fetchPreviousEmailPage();
-                  setCurrentPage((prev) => prev - 1);
+                  setCurrentPage(currentPage - 1);
                 }
               }}
               className={!hasPreviousEmailPage || isFetchingPreviousEmailPage ? "pointer-events-none opacity-50" : ""}
@@ -54,7 +55,7 @@ export default function PaginatedEmailView({ selectedEmailId, setSelectedEmailId
               onClick={async() => {
                 if (hasNextEmailPage && !isFetchingNextEmailPage) {
                   await fetchNextEmailPage();
-                  setCurrentPage((prev) => prev + 1);
+                  setCurrentPage(currentPage + 1);
                 }
               }}
               className={!hasNextEmailPage || isFetchingNextEmailPage ? "pointer-events-none opacity-50" : ""}
