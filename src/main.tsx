@@ -8,14 +8,12 @@ import router from './lib/routes';
 const queryClient = new QueryClient();
 
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development' && !import.meta.env.VITE_MSW_ENABLED) {
+  if (import.meta.env.MODE !== 'development' || !import.meta.env.VITE_MSW_ENABLED) {
     return;
   }
 
   const { worker } = await import('./mocks');
 
-  // `worker.start()` returns a Promise that resolves
-  // once the Service Worker is up and ready to intercept requests.
   return worker.start();
 }
 
