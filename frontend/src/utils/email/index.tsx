@@ -2,9 +2,9 @@ import type { DetailedEmail, Email } from '@/types';
 import { AlertCircle, CheckCircle2, Star } from 'lucide-react';
 
 export function getEmailPriority(email: Email | DetailedEmail): 'low' | 'moderate' | 'high' {
-  if (email.importance >= 0 && email.importance <= 3) {
+  if (email.importance >= 0 && email.importance <= 30) {
     return 'low';
-  } else if (email.importance >= 4 && email.importance <= 7) {
+  } else if (email.importance >= 40 && email.importance <= 70) {
     return 'moderate';
   } else {
     return 'high';

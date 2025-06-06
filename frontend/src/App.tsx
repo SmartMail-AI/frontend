@@ -9,6 +9,7 @@ import LoginContext from './contexts/LoginContext';
 import CenteredSpinner from './components/centered-spinner';
 import { Button } from './components/ui/button';
 import { invalidateToken, isTokenStored } from './utils/storage';
+import icon from '@/assets/smartmail_icon.png';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>();
@@ -35,9 +36,12 @@ export default function App() {
   return (
     <div className="flex h-screen bg-background">
       {/* 사이드바 - 카테고리 */}
-      <div className="w-64 border-r bg-muted/30">
+      <div className="w-64 border-r bg-muted/30 shrink-0">
         <div className="p-4">
-          <h2 className="text-lg font-semibold mb-4">이메일 분류</h2>
+          <div className="flex items-center justify-center mb-4 gap-4">
+            <img src={icon} alt='logo' className="w-12 h-12" />
+            <h2 className="text-lg font-semibold">SmartMail</h2>
+          </div>
           <ScrollArea className="h-[calc(100vh-120px)]">
             {
               isLoggedIn ?
@@ -61,7 +65,7 @@ export default function App() {
       </div>
 
       {/* 이메일 목록 */}
-      <div className={`flex flex-col ${selectedEmailId ? 'w-96 border-r' : 'flex-1'}`}>
+      <div className={`flex flex-col ${selectedEmailId ? 'w-96 border-r' : 'w-[calc(100dvw-16rem)]'}`}>
         <div className='p-4 border-b'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-2'>

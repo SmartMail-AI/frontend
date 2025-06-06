@@ -33,7 +33,7 @@ export default function EmailListView({
                 <AvatarImage src={`/placeholder.svg?height=32&width=32`}/>
                 <AvatarFallback>{email.from_[0]}</AvatarFallback>
               </Avatar>
-              <div className="flex-1 min-w-0 w-[calc(100vw-16rem)]">
+              <div className="flex-1 min-w-0 w-[calc(100dvw-32rem)]">
                 <div className="flex items-center justify-between mb-1">
                   <span
                     className={`text-sm font-medium truncate`}>
