@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: ".env"
-          target: "/home/${{ secrets.SSH_USER }}/.env"
+          target: "/home/${{ secrets.SSH_USER }}"
 
       - name: Deploy on remote server via SSH
         uses: appleboy/ssh-action@v1.0.3
@@ -47,10 +47,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker stop smartmail || true
-            docker rm smartmail || true
-            docker pull cla6shade/smartmail:latest
-            docker run -d \
+            sudo docker stop smartmail || true
+            sudo docker rm smartmail || true
+            sudo docker pull cla6shade/smartmail:latest
+            sudo docker run -d \
               --name smartmail \
               --env-file /home/${{ secrets.SSH_USER }}/.env \
               -v /home/${{ secrets.SSH_USER }}/emails.db:/emails.db \
