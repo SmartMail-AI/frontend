@@ -1,4 +1,4 @@
-import type { Email } from '../types';
+import type { Email } from '@/types';
 import { createContext, type ReactNode, useState } from 'react';
 
 interface ApplicationContextValue {

@@ -1,10 +1,10 @@
-import { ScrollArea } from '../components/ui/scroll-area';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Clock } from 'lucide-react';
-import { Badge } from '../components/ui/badge';
-import { getPriorityColor } from '../utils/theme';
-import type { Email } from '../types';
-import { getEmailPriority } from '../utils/email';
+import { Badge } from '@/components/ui/badge';
+import { getPriorityColor } from '@/utils/theme';
+import type { Email } from '@/types';
+import { getEmailPriority } from '@/utils/email';
 
 interface EmailListViewProps {
   emails: Email[];

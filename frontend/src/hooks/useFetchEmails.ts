@@ -2,7 +2,7 @@ import {
   type InfiniteData,
   useSuspenseInfiniteQuery,
 } from '@tanstack/react-query';
-import { fetchEmails } from '../api';
+import { fetchEmails } from '@/api';
 import type { AxiosError } from 'axios';
 
 interface UseFetchEmailsProps {

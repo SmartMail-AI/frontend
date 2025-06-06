@@ -3,7 +3,7 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem, PaginationNext, PaginationPrevious,
-} from '../components/ui/pagination';
+} from '@/components/ui/pagination';
 import useFetchEmails from '../hooks/useFetchEmails';
 
 interface PaginatedEmailViewProps {

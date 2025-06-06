@@ -1,13 +1,13 @@
-import { Badge } from "../components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
-import { ScrollArea } from "../components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
-import { Button } from "../components/ui/button"
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import { Calendar, Mail, User, CheckCircle2, X, Reply, Forward, Archive, Trash2 } from "lucide-react"
-import { fetchEmail } from "../api"
+import { fetchEmail } from '@/api'
 import { useSuspenseQuery } from "@tanstack/react-query"
-import type { DetailedEmail } from "../types"
-import { formatDate, getImportanceIcon, getInitials, getSentimentColor } from "../utils/email"
+import type { DetailedEmail } from '@/types'
+import { formatDate, getImportanceIcon, getInitials, getSentimentColor } from '@/utils/email'
 
 // 1. HTML 본문을 렌더링하기 위한 함수 추가
 function renderHtmlBody(html: string) {

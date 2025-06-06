@@ -1,4 +1,4 @@
-import type { DetailedEmail, Email } from '../../types';
+import type { DetailedEmail, Email } from '@/types';
 import { AlertCircle, CheckCircle2, Star } from 'lucide-react';
 
 export function getEmailPriority(email: Email | DetailedEmail): 'low' | 'moderate' | 'high' {

@@ -1,5 +1,5 @@
 import { createContext, type ReactNode, useState } from 'react';
-import { isTokenStored } from '../utils/storage';
+import { isTokenStored } from '@/utils/storage';
 
 interface LoginContextProps {
   children?: ReactNode;

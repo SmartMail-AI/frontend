@@ -1,4 +1,4 @@
-import type { DetailedEmail } from '../types';
+import type { DetailedEmail } from '@/types';
 
 const mockCategories = [
   '중요', '프로모션', '쇼핑', '스팸'

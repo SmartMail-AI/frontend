@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { getStoredValue, invalidateToken } from '../utils/storage';
+import { getStoredValue, invalidateToken } from '@/utils/storage';
 import type {
   DetailedEmail,
   GetAuthUrlResponse,
   GetEmailsResponse,
-} from '../types';
+} from '@/types';
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL! + '/api',
