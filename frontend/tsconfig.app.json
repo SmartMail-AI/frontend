@@ -23,11 +23,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    "compilerOptions": {
-      "baseUrl": "./src",
-      "paths": {
-        "@/*": ["./*"]
-      }
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
     }
   },
   "include": ["src"]
