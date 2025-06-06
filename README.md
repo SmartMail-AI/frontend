@@ -41,7 +41,7 @@ SmartMail-AI는 사용자의 Gmail 계정에서 이메일을 가져와, Google�
 git clone https://github.com/SmartMail-AI/project
 ```
 
-### 1. 백엔드 실행
+### 2. 백엔드 실행
 ```bash
 cd backend
 python -m venv venv
@@ -57,7 +57,7 @@ GMAIL_CLIENT_ID=...
 GMAIL_CLIENT_SECRET=...
 ```
 
-### 2. 프론트엔드 실행
+### 3. 프론트엔드 실행
 ```bash
 cd frontend
 npm install
