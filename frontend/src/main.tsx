@@ -18,7 +18,6 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
-  console.log('Mock service worker has been initialized');
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
