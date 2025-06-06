@@ -12,9 +12,46 @@ export interface Email {
   importance: number;
 }
 
-export interface DetailedEmail extends Email {
-  content: string;
+export interface DetailedEmail {
+  id: string
+  threadId: string
+  labelIds: string[]
+  snippet: string
+  headers: EmailHeaders
+  body: string
+  summary: string
+  key_points: string | string[]
+  sentiment: string | null
+  action_items: string | string[]
+  category: string
+  importance: number
+  received_at: string
+  processed_at: string
 }
+
+export interface EmailHeaders {
+  'Delivered-To': string
+  'Received': string
+  'X-Google-Smtp-Source': string
+  'X-Received': string
+  'ARC-Seal': string
+  'ARC-Message-Signature': string
+  'ARC-Authentication-Results': string
+  'Return-Path': string
+  'Received-SPF': string
+  'Authentication-Results': string
+  'MIME-Version': string
+  'From': string
+  'To': string
+  'Subject': string
+  'X-Mailer': string
+  'X-Priority': string
+  'Message-Id': string
+  'Date': string
+  'X-MSP-FID': string
+  'Content-Type': string
+}
+
 
 export interface GetEmailsResponse {
   messages: Email[];
