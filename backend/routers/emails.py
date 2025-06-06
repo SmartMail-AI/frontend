@@ -12,7 +12,7 @@ from routers.auth import get_current_user, TokenData
 from services.email_classifier import classify_email, EmailCategory
 from services.gmail_service import GmailService
 from sqlalchemy.orm import Session
-from models.email import get_db, init_db, Email
+from models.email_model import get_db, init_db, Email
 from services.email_processor import process_email, get_emails_by_category, get_latest_email_id
 from datetime import datetime, timedelta
 from fastapi_utils.tasks import repeat_every

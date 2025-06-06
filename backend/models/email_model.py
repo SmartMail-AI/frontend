@@ -54,7 +54,7 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def init_db():
-    from models.email import Email
+    from models.email_model import Email
     """데이터베이스를 초기화합니다."""
     # 테이블 생성
     Base.metadata.create_all(bind=engine)

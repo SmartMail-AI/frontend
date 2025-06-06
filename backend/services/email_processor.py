@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 import re
 from sqlalchemy.orm import Session
-from models.email import Email
+from models.email_model import Email
 from services.gmail_service import GmailService
 from services.email_classifier import classify_email
 from services.email_summarizer import summarize_email
