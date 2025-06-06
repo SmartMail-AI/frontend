@@ -85,7 +85,7 @@ export default function EmailViewer({
                 </div>
                 <div className="flex items-center gap-2">
                   {getImportanceIcon(selectedEmail.importance)}
-                  <Badge variant="outline">{selectedEmail.importance}/10</Badge>
+                  <Badge variant="outline">{selectedEmail.importance}/100</Badge>
                 </div>
               </div>
             </CardHeader>
