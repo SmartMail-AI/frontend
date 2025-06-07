@@ -114,7 +114,7 @@ async def google_auth_callback(request: FastAPIRequest, code: str):
     try:
         mode = os.getenv('MODE', 'development')
         if mode == 'production':
-            redirect_uri = "https://server.cla6sha.de/auth/google/callback"
+            redirect_uri = "https://server.cla6sha.de/api/auth/google/callback"
         else:
             redirect_uri = str(request.url_for('google_auth_callback'))
         flow = Flow.from_client_config(
