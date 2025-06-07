@@ -40,8 +40,8 @@ SmartMail-AI는 사용자의 Gmail 계정에서 이메일을 가져와, Google�
 ```bash
 http://smartmail.cla6sha.de
 ```
-
-### 2. 프로젝트 클론
+<!--  -->
+### 2. 로컬에서 사용
 ```bash
 git clone https://github.com/SmartMail-AI/project
 ```
