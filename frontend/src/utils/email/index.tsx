@@ -1,7 +1,8 @@
 import type { DetailedEmail, Email } from '@/types';
 import { AlertCircle, CheckCircle2, Star } from 'lucide-react';
 
-export function safeParseArray(info: unknown): string[] {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function safeParseArray(info: any): string[] {
   if(Array.isArray(info)) {
     return info;
   }
