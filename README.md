@@ -36,12 +36,17 @@ SmartMail-AI는 사용자의 Gmail 계정에서 이메일을 가져와, Google�
 
 ## G. 개발 결과물 사용 방법
 
-### 1. 프로젝트 클론
+### 1. AWS EC2 도메인 접속
+```bash
+[http://smartmail.cla6sha.de](https://smartmail.cla6sha.de)
+```
+
+### 2. 프로젝트 클론
 ```bash
 git clone https://github.com/SmartMail-AI/project
 ```
 
-### 2. 백엔드 실행
+#### 2-1. 백엔드 실행
 ```bash
 cd backend
 python -m venv venv
@@ -50,21 +55,25 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-#### 필요한 환경 변수 (.env)
+##### 필요한 환경 변수 (.env)
 ```
 GEMINI_API_KEY=your_google_api_key
 GMAIL_CLIENT_ID=...
 GMAIL_CLIENT_SECRET=...
+JWT_SECRET_KEY=...
+OAUTH_REDIRECT_URI=http://localhost:8000/api/auth/google/callback
+SPA_REDIRECT_URI=http://localhost:5173/auth/result
+MODE=development
 ```
 
-### 3. 프론트엔드 실행
+#### 2-2. 프론트엔드 실행
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-#### 필요한 환경 변수 (.env)
+##### 필요한 환경 변수 (.env)
 ```
 VITE_SERVER_URL=http://localhost:8000
 ```
