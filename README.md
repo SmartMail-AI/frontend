@@ -38,8 +38,8 @@ SmartMail-AI는 사용자의 Gmail 계정에서 이메일을 가져와, Google�
 
 > ⚠️ **주의사항**
 >
-> - GEMINI API 토큰 한도로 분류가 되지 않을 수 있습니다.(무료버전 사용중)
-> - `.env` 파일은 프로젝트 루트 또는 `backend` 폴더에 직접 생성해야 하며, GitHub에는 포함되지 않습니다.
+> - GEMINI API 토큰 한도로 분류가 되지 않을 수 있습니다. (무료 버전 사용중)
+> - `.env` 파일은 `frontend`와 `backend` 폴더에 직접 생성해야 하며, GitHub에는 포함되지 않습니다.
 > - `.env`에 들어갈 환경 변수들은 아래 실행 방법 중에 안내되어 있습니다.
 > - `JWT_SECRET_KEY`, `GEMINI_API_KEY`, `GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET` 등은 민감 정보이므로 외부에 노출되지 않도록 주의하세요.
 
