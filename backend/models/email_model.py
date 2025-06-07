@@ -49,7 +49,7 @@ class Email(Base):
         }
 
 # SQLite 데이터베이스 설정
-DATABASE_URL = "sqlite:///./emails.db"
+DATABASE_URL = "sqlite:///./data/emails.db"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -64,4 +64,4 @@ def get_db():
     try:
         yield db
     finally:
-        db.close() 
+        db.close()
