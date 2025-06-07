@@ -38,7 +38,7 @@ SmartMail-AI는 사용자의 Gmail 계정에서 이메일을 가져와, Google�
 
 ### 1. AWS EC2 도메인 접속
 ```bash
-[http://smartmail.cla6sha.de](http://smartmail.cla6sha.de)
+http://smartmail.cla6sha.de
 ```
 
 ### 2. 프로젝트 클론
