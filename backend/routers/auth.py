@@ -91,7 +91,11 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 @router.get("/google")
 async def google_auth(request: FastAPIRequest):
     """Google OAuth 인증 URL을 생성합니다."""
-    redirect_uri = str(request.url_for('google_auth_callback'))
+    mode = os.getenv('MODE', 'development')
+    if mode == 'production':
+        redirect_uri = "https://server.cla6sha.de/auth/google/callback"
+    else:
+        redirect_uri = str(request.url_for('google_auth_callback'))
     flow = Flow.from_client_config(
         CLIENT_CONFIG,
         scopes=SCOPES,
@@ -108,7 +112,11 @@ async def google_auth(request: FastAPIRequest):
 async def google_auth_callback(request: FastAPIRequest, code: str):
     """Google OAuth 콜백을 처리합니다."""
     try:
-        redirect_uri = str(request.url_for('google_auth_callback'))
+        mode = os.getenv('MODE', 'development')
+        if mode == 'production':
+            redirect_uri = "https://server.cla6sha.de/auth/google/callback"
+        else:
+            redirect_uri = str(request.url_for('google_auth_callback'))
         flow = Flow.from_client_config(
             CLIENT_CONFIG,
             scopes=SCOPES,
