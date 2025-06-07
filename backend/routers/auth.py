@@ -93,7 +93,7 @@ async def google_auth(request: FastAPIRequest):
     """Google OAuth 인증 URL을 생성합니다."""
     mode = os.getenv('MODE', 'development')
     if mode == 'production':
-        redirect_uri = "https://server.cla6sha.de/auth/google/callback"
+        redirect_uri = "https://server.cla6sha.de/api/auth/google/callback"
     else:
         redirect_uri = str(request.url_for('google_auth_callback'))
     flow = Flow.from_client_config(
@@ -123,25 +123,25 @@ async def google_auth_callback(request: FastAPIRequest, code: str):
             redirect_uri=redirect_uri
         )
         flow.fetch_token(code=code)
-        
+
         credentials = flow.credentials
-        
+
         # Google People API를 사용하여 사용자 정보 가져오기
         service = build('people', 'v1', credentials=credentials)
         profile = service.people().get(
             resourceName='people/me',
             personFields='emailAddresses,names'
         ).execute()
-        
+
         # 사용자 이메일 가져오기
         email = profile['emailAddresses'][0]['value']
         # 사용자 이름 가져오기
         name = profile['names'][0]['displayName']
-        
+
         # TODO: 여기서 사용자 정보를 데이터베이스에 저장
         # user_id = create_or_update_user(email, name, credentials)
         user_id = email  # 임시로 이메일을 user_id로 사용
-        
+
         # JWT 토큰 생성
         access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
         jwt_token = create_access_token(
