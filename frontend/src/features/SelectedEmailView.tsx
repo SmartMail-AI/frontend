@@ -7,7 +7,13 @@ import { Calendar, Mail, User, CheckCircle2, X, Reply, Forward, Archive, Trash2 
 import { fetchEmail } from '@/api'
 import { useSuspenseQuery } from "@tanstack/react-query"
 import type { DetailedEmail } from '@/types'
-import { formatDate, getImportanceIcon, getInitials, getSentimentColor } from '@/utils/email'
+import {
+  formatDate,
+  getImportanceIcon,
+  getInitials,
+  getSentimentColor,
+  safeParseArray,
+} from '@/utils/email';
 
 // 1. HTML 본문을 렌더링하기 위한 함수 추가
 function renderHtmlBody(html: string) {
@@ -25,12 +31,8 @@ export default function EmailViewer({
     queryKey: ["email", selectedEmailId],
     queryFn: () => fetchEmail(selectedEmailId),
   })
-  const keyPoints = Array.isArray(selectedEmail.key_points)
-    ? selectedEmail.key_points
-    : [...JSON.parse(selectedEmail.key_points)]
-  const actionItems = Array.isArray(selectedEmail.action_items)
-    ? selectedEmail.action_items
-    : [...JSON.parse(selectedEmail.action_items)]
+  const keyPoints = safeParseArray(selectedEmail.key_points);
+  const actionItems = safeParseArray(selectedEmail.action_items);
 
   return (
     <ScrollArea className="h-screen">

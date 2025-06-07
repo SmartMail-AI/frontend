@@ -18,6 +18,7 @@ export default function useFetchEmails({ selectedCategory }: UseFetchEmailsProps
     data: emailPageData,
     hasNextPage: hasNextEmailPage,
     hasPreviousPage: hasPreviousEmailPage,
+    isFetchNextPageError: isFetchingNextEmailPageError
   } = useSuspenseInfiniteQuery<
     Awaited<ReturnType<typeof fetchEmails>>,
     AxiosError,
@@ -40,5 +41,6 @@ export default function useFetchEmails({ selectedCategory }: UseFetchEmailsProps
     emailPageData,
     hasNextEmailPage,
     hasPreviousEmailPage,
+    isFetchingNextEmailPageError,
   }
 }

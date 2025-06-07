@@ -1,6 +1,20 @@
 import type { DetailedEmail, Email } from '@/types';
 import { AlertCircle, CheckCircle2, Star } from 'lucide-react';
 
+export function safeParseArray(info: unknown): string[] {
+  if(Array.isArray(info)) {
+    return info;
+  }
+  const parsed = JSON.parse(info);
+  if(Array.isArray(parsed)) {
+    return [...parsed];
+  }
+  if(typeof parsed === 'object') {
+    return Object.entries(parsed).map(([k, v]) => `${k}: ${v}`);
+  }
+  return [];
+}
+
 export function getEmailPriority(email: Email | DetailedEmail): 'low' | 'moderate' | 'high' {
   if (email.importance >= 0 && email.importance <= 30) {
     return 'low';

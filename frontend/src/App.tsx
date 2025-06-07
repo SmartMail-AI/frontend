@@ -10,6 +10,7 @@ import CenteredSpinner from './components/centered-spinner';
 import { Button } from './components/ui/button';
 import { invalidateToken, isTokenStored } from './utils/storage';
 import icon from '@/assets/smartmail_icon.png';
+import EmailFallback from '@/components/email-fallback';
 
 export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>();
@@ -80,7 +81,7 @@ export default function App() {
         </div>
         {
           isLoggedIn ?
-            <Suspense fallback={<CenteredSpinner />}>
+            <Suspense fallback={<EmailFallback />}>
               <PaginatedEmailView
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
